@@ -60,19 +60,9 @@ public class WordCount extends Configured implements Tool {
     // mapper
     // "red red"
     public static class WordsMapper extends Mapper<LongWritable, Text, Text, IntWritable> {
-        private IntWritable ONE = new IntWritable(1);
-        private Text outKet = new Text();
 
         @Override
         public void map(LongWritable key, Text value, Context context) throws IOException, InterruptedException {
-            String line = value.toString();
-            String[] words = line.split("\\s");
-            for(String word: words) {
-                outKet.set(word);
-                // red 1
-                // red 1
-                context.write(outKet, ONE);
-            }
         }
 
     }
@@ -83,15 +73,6 @@ public class WordCount extends Configured implements Tool {
         // red - > (1, 1)
         @Override
         public void reduce(Text key, Iterable<IntWritable> values, Context context)  throws IOException, InterruptedException {
-            int n = 0;
-            Iterator<IntWritable> it = values.iterator();
-            while( it.hasNext() ) {
-                n+=it.next().get();
-            }
-
-            context.write(key, new IntWritable(n));  // red -> 2
-
-            context.getCounter("STAT", "WORDS_COUNT").increment(n);
 
         }
 

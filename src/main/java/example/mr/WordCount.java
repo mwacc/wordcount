@@ -19,6 +19,9 @@ import org.apache.hadoop.util.ToolRunner;
 import java.io.IOException;
 import java.util.Iterator;
 
+/**
+ * hadoop jar ... example.mr.WordCount -DINPUT=... -DOUTPUT=...
+ */
 public class WordCount extends Configured implements Tool {
 
     public static void main(String[] args) throws Exception {
